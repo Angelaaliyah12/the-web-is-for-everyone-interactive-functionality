@@ -26,6 +26,118 @@ app.set('views', './views')
 
 console.log('Let op: Er zijn nog geen routes. Voeg hier dus eerst jouw GET en POST routes toe.')
 
+// Maak een GET route voor de index (meestal doe je dit in de root, als /)
+app.get('/', async function (request, response) {
+
+  const params = {
+    fields: '*'
+  }
+
+  const productResponse = await fetch(
+    'https://fdnd-agency.directus.app/items/milledoni_products?' +
+    new URLSearchParams(params)
+  )
+
+  const productResponseJSON = await productResponse.json()
+
+  response.render('index.liquid', {
+    products: productResponseJSON.data
+  })
+
+})
+
+app.get('/valentijnsdag', async function (request, response) {
+
+  const params = {
+    fields: '*',
+    'filter[tags][_contains]': 'valentijnsdag'
+  }
+
+  const productResponse = await fetch(
+    'https://fdnd-agency.directus.app/items/milledoni_products?' +
+    new URLSearchParams(params)
+  )
+
+  const productResponseJSON = await productResponse.json()
+
+  response.render('valentijnsdag.liquid', {
+    products: productResponseJSON.data
+  })
+
+})
+
+app.get('/:tags', async function (request, response){
+const params = {
+  fields: 'image,name',
+'filter[tags][_contains]': request.params.tags
+}
+
+  const productResponse = await fetch(
+    'https://fdnd-agency.directus.app/items/milledoni_products?' +
+    new URLSearchParams(params)
+  )
+
+  const productResponseJSON = await productResponse.json()
+
+  response.render('index.liquid', {
+    products: productResponseJSON.data
+  })
+
+})
+
+app.get('/product/:id', async function (request, response) {
+
+  const id = request.params.id
+
+  const productResponse = await fetch(
+    'https://fdnd-agency.directus.app/items/milledoni_products/' + id
+  )
+
+  const productResponseJSON = await productResponse.json()
+
+  response.render('product.liquid', {
+    product: productResponseJSON.data
+  })
+
+})
+app.get('/product', async function (request, response) {
+
+  const params = {
+    fields: '*'
+  }
+
+  const productResponse = await fetch(
+    'https://fdnd-agency.directus.app/items/milledoni_products?' +
+    new URLSearchParams(params)
+  )
+
+  const productResponseJSON = await productResponse.json()
+
+  response.render('product.liquid', {
+    products: productResponseJSON.data
+  })
+
+})
+
+app.get('/lijst', async function (request, response) {
+
+  const params = {
+    fields: '*'
+  }
+
+  const productResponse = await fetch(
+    'https://fdnd-agency.directus.app/items/milledoni_products?' +
+    new URLSearchParams(params)
+  )
+
+  const productResponseJSON = await productResponse.json()
+
+  response.render('lijst.liquid', {
+    products: productResponseJSON.data
+  })
+
+})
+
 /*
 // Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()
 app.get(…, async function (request, response) {

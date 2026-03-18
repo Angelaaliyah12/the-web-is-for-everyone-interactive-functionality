@@ -1,0 +1,22 @@
+    <link rel="stylesheet" href="/styles/valentijn.css">
+    <header class="main">
+    <img class="main-img" src="/assets/image-1.png" alt="afbeelding achtergrond hartjes">
+    <div class="main-tekst">
+    <h1>Valentijn cadeaus</h1>
+    <p>De leukste cadeaus voor je geliefde</p>
+  </div>
+    </header>
+
+<ul class="product-lijst">
+  {% for product in products %}
+  <li class="product-kaart">
+    <a href="/product/{{ product.id }}">
+      <img src="{{ product.image }}" alt="{{ product.name }}">
+
+    </a>
+
+    <h2>{{ product.name }}</h2>
+  </li>
+  {% endfor %}
+</ul>
+</ul>

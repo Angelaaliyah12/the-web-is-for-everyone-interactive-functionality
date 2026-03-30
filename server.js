@@ -26,6 +26,8 @@ app.set('views', './views')
 
 console.log('Let op: Er zijn nog geen routes. Voeg hier dus eerst jouw GET en POST routes toe.')
 
+app.locals.opgeslagen = [];
+
 // Maak een GET route voor de index (meestal doe je dit in de root, als /)
 app.get('/', async function (request, response) {
 
@@ -44,6 +46,28 @@ app.get('/', async function (request, response) {
     products: productResponseJSON.data
   })
 
+})
+
+app.get('/lijst', function (request, response) {
+
+  response.render('lijst.liquid', {
+    products: app.locals.opgeslagen
+  })
+
+});
+app.post('/opslaan', async function (request, response) {
+
+  const productId = request.body.productId;
+
+  const productResponse = await fetch(
+    'https://fdnd-agency.directus.app/items/milledoni_products/' + productId
+  )
+
+  const productResponseJSON = await productResponse.json()
+
+  app.locals.opgeslagen.unshift(productResponseJSON.data) /*unsift is tegenovergestelde van push de nieuw item komt dan als eerst in de array*/
+
+  response.redirect('/lijst') 
 })
 
 app.get('/valentijnsdag', async function (request, response) {
@@ -118,26 +142,6 @@ app.get('/product', async function (request, response) {
   })
 
 })
-
-app.get('/lijst', async function (request, response) {
-
-  const params = {
-    fields: '*'
-  }
-
-  const productResponse = await fetch(
-    'https://fdnd-agency.directus.app/items/milledoni_products?' +
-    new URLSearchParams(params)
-  )
-
-  const productResponseJSON = await productResponse.json()
-
-  response.render('lijst.liquid', {
-    products: productResponseJSON.data
-  })
-
-})
-
 /*
 // Zie https://expressjs.com/en/5x/api.html#app.get.method over app.get()
 app.get(…, async function (request, response) {

@@ -10,15 +10,23 @@
 
 <body>
   <a href="/lijst"><div>Mijn lijst</div></a>
-  <img src="/assets/opslaan.png" alt="opslaan-icoon">
 <ul class="product-lijst">
   {% for product in products %}
   <li class="product-kaart">
+    
     <a href="/product/{{ product.id }}">
-      <img src="{{ product.image }}" alt="{{ product.name }}">
+    <img class="product-img" src="{{ product.image }}" alt="{{ product.name }}">
     </a>
 
+    <form method="POST" action="/opslaan">
+    <input type="hidden" name="productId" value="{{ product.id }}">
+    <button type="submit" class="opslaan-knop">
+      <img class="opslaan" src="/assets/opslaan.png" alt="opslaan">
+    </button>
+  </form>
+
     <h2>{{ product.name }}</h2>
+
   </li>
   {% endfor %}
 </ul>

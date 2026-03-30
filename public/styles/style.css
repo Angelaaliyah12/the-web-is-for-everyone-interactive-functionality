@@ -1,17 +1,33 @@
 .product-lijst{
-    display:grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 kaarten komen hierdoor naast elkaar te staan*/
-    gap:20px;
     list-style:none; /*Zodat je dan geen puntjes ziet van de lijst*/
     padding:0;
+    display:grid;
+    gap:25px;
+    
+     @media (min-width: 768px){
+         display:grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 kaarten komen hierdoor naast elkaar te staan*/
+        gap:20px;
+     }
+
+     @media (min-width: 768px){
+         display:grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 kaarten komen hierdoor naast elkaar te staan*/
+        gap:20px;
+     }
+
 }
 .product-kaart{
-    border:1px solid #ddd;
-    padding: 10px;
+    border:5px solid grey;
+    border:5px solid #ddddddec;
+    padding: 10px; /*Baseline Widely available across major browsers*/
     text-align:center;
     background: white;
+    gap:20px;
+    position: relative; 
+    
 }
-.product-kaart img{
+.product-img{
     width: 100%;
     height: 200px; /*dit is de hoogte dat alle img krijgen*/
     object-fit: cover; /* hierdoor vult de afbeelding het vakje zonder te vervormen*/    
@@ -19,4 +35,22 @@
 .product-kaart h2{
     font-size: 16px;
     margin-top: 10px;
+    
+  @supports (background-clip: text) {
+    color: transparent;
+    background: linear-gradient( #d4491e, #dec442);
+    background-clip: text;}
+}
+
+.opslaan-knop{   
+  position: absolute;
+  top: 10px;  /* verplaatsing naar boven in de product kaart img */
+  right: 10px; /* verplaatsing van rechts in de product kaart img */
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 7px;
+}
+.opslaan{
+  width: 30px;
 }

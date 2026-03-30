@@ -1,2 +1,30 @@
-<form>
-    </form>
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/styles/lijst.css">
+</head>
+
+<body>
+
+<h1>Mijn lijst</h1>
+<a href="/">← Terug naar Home pagina</a>
+
+<ul class="product-lijst">
+  {% for product in products %}
+    <li class="product-kaart">
+      <h2>{{ product.name }}</h2>
+
+      <a href="/product/{{ product.id }}">
+      <img class="product-img" src="{{ product.image }}" alt="{{ product.name }}">
+      </a>
+      
+    </li>
+  {% endfor %}
+</ul>
+
+</body>
+</html>

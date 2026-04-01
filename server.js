@@ -108,6 +108,19 @@ app.post('/opslaan', async function (request, response) {
 
 //   response.redirect('/lijst') 
 // })
+app.post('/verwijder', async function (request, response) {
+
+  const id = request.body.id;
+await fetch(
+  'https://fdnd-agency.directus.app/items/milledoni_users_milledoni_products_1/' + id,
+  {
+    method: 'DELETE'
+  }
+);
+
+  response.redirect('/lijst');
+
+});
 
 app.get('/valentijnsdag', async function (request, response) {
 

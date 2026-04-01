@@ -16,11 +16,15 @@
 <ul class="product-lijst">
   {% for product in products %}
     <li class="product-kaart">
-      <h2>{{ product.name }}</h2>
+      <h2>{{ product.milledoni_products_id.name }}</h2>
 
-      <a href="/product/{{ product.id }}">
-      <img class="product-img" src="{{ product.image }}" alt="{{ product.name }}">
+      <a href="/product/{{ product.milledoni_products_id.id }}">
+        <img class="product-img" src="{{ product.milledoni_products_id.image }}" alt="{{ product.milledoni_products_id.name }}">
       </a>
+       <form method="POST" action="/verwijder">
+        <input type="hidden" name="id" value="{{ product.id }}">
+        <button type="submit">Verwijder</button>
+      </form>
       
     </li>
   {% endfor %}

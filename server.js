@@ -48,27 +48,66 @@ app.get('/', async function (request, response) {
 
 })
 
-app.get('/lijst', function (request, response) {
+app.get('/lijst', async function (request, response) {
+
+  const userId = 61; // mijn user ID
+  const params = {
+    'filter[milledoni_users_id][_eq]': userId,
+     'fields': '*,milledoni_products_id.*'
+  };
+
+  const productResponse = await fetch('https://fdnd-agency.directus.app/items/milledoni_users_milledoni_products_1?' +
+   new URLSearchParams(params)
+  )
+  const productResponseJSON = await productResponse.json();
 
   response.render('lijst.liquid', {
-    products: app.locals.opgeslagen
-  })
+    products: productResponseJSON.data
+  });
 
 });
+
+// app.get('/lijst', function (request, response) {
+
+//   response.render('lijst.liquid', {
+//     products: app.locals.opgeslagen
+//   })
+
+// });
+
+
 app.post('/opslaan', async function (request, response) {
 
   const productId = request.body.productId;
 
-  const productResponse = await fetch(
-    'https://fdnd-agency.directus.app/items/milledoni_products/' + productId
-  )
+  await fetch('https://fdnd-agency.directus.app/items/milledoni_users_milledoni_products_1', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},//headers= uitleg over je date> Deze data dat ik stuur is json// 
+    
+    body: JSON.stringify({ //body=het lichaam van je request
+      milledoni_users_id: 61,
+      milledoni_products_id: productId
+    })
+  });
 
-  const productResponseJSON = await productResponse.json()
+  response.redirect('/lijst');
+});
 
-  app.locals.opgeslagen.unshift(productResponseJSON.data) /*unsift is tegenovergestelde van push de nieuw item komt dan als eerst in de array*/
 
-  response.redirect('/lijst') 
-})
+// app.post('/opslaan', async function (request, response) {
+
+//   const productId = request.body.productId;
+
+//   const productResponse = await fetch(
+//     'https://fdnd-agency.directus.app/items/milledoni_products/' + productId
+//   )
+
+//   const productResponseJSON = await productResponse.json()
+
+//   app.locals.opgeslagen.unshift(productResponseJSON.data) /*unsift is tegenovergestelde van push de nieuw item komt dan als eerst in de array*/
+
+//   response.redirect('/lijst') 
+// })
 
 app.get('/valentijnsdag', async function (request, response) {
 

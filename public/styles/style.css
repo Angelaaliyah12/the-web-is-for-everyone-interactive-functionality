@@ -1,13 +1,73 @@
+body{
+  margin: 0;
+}
+.header {
+  display: flex;
+  justify-content: space-between; /* links en rechts spatie tussen de items */
+  align-items: center; /* verticaal zetten */
+  padding: 15px 25px;
+  border-bottom: 1px solid #ddd;
+  position: sticky; /* hierdoor word de header sticky het beweegt dus mee */
+  top: 0;           /* Afstand vanaf de bovenkant van het scherm */
+  z-index: 1000;    /* hierdoor blijft de header voor alle andere dingen op de pagina */
+  background-color: white; 
+  box-shadow: 0 2px 5px rgba(104, 2, 2, 0.436); 
+  border-radius: 20px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 25px; /* ruimte tussen icons */
+}
+
+.icon{
+width: 200px;
+height: auto;
+}
+.filter{
+width: 40px;
+height: auto;
+}
+.list{
+width: 200px;
+height: auto;
+}
+.profile-icon{
+width: 40px;
+height: auto;
+}
+
+.layout{
+  display:flex;
+  gap: 25px;
+}
+.ai{
+  margin-top: 15px;
+  margin-left: 25px;
+  width: 300px;
+  height: auto;
+  bottom: 10px; 
+  padding-top: 350px;
+  padding-bottom: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #B20000;
+  border-radius: 20px;
+   position: sticky; /* hierdoor word de header sticky het beweegt dus mee */
+  top: 0;           /* Afstand vanaf de bovenkant van het scherm */
+  z-index: 900;    /* hierdoor blijft de header voor alle andere dingen op de pagina */
+}
 .product-lijst{
     list-style:none; /*Zodat je dan geen puntjes ziet van de lijst*/
     padding:0;
     display:grid;
     gap:25px;
-    
+    margin-left: 25px;
+    margin-right:25px;
      @media (min-width: 768px){
          display:grid;
         grid-template-columns: repeat(3, 1fr); /* 3 kaarten komen hierdoor naast elkaar te staan*/
-        gap:20px;
+        gap:40px;
      }
 
      @media (min-width: 768px){
@@ -18,14 +78,14 @@
 
 }
 .product-kaart{
-    border:5px solid grey;
-    border:5px solid #ddddddec;
-    padding: 10px; /*Baseline Widely available across major browsers*/
+    border:2px solid red;
+    border:2px solid #B20000;
+    padding: 5px; /*Baseline Widely available across major browsers*/
     text-align:center;
     background: white;
     gap:20px;
     position: relative; 
-    
+    border-radius: 10px;
 }
 .product-img{
     width: 100%;
@@ -35,11 +95,7 @@
 .product-kaart h2{
     font-size: 16px;
     margin-top: 10px;
-    
-  @supports (background-clip: text) {
-    color: transparent;
-    background: linear-gradient( #d4491e, #dec442);
-    background-clip: text;}
+
 }
 
 .opslaan-knop{   
@@ -53,4 +109,23 @@
 }
 .opslaan{
   width: 30px;
+}
+
+.categorie-paginas a{
+color: white;
+text-decoration: none;
+}
+.categorie-paginas{
+  list-style: none;
+  text-decoration:underline white;
+}
+.categorie-paginas a:hover{
+  color: blue;
+}
+footer{
+  margin-top: 50px;
+  background-color: #B20000;
+  padding: 150px;
+  margin-left: 0;
+  margin-right: 0;
 }

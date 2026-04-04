@@ -179,6 +179,9 @@ body {
 .categorie-paginas {
   list-style: none;
   text-decoration: underline white;
+  display: flex;
+  flex-direction: column;
+  gap:25px;
 }
 
 .categorie-paginas a:hover {

@@ -9,7 +9,7 @@ import { Liquid } from 'liquidjs';
 const app = express()
 
 // Maak werken met data uit formulieren iets prettiger
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }))
 
 // Gebruik de map 'public' voor statische bestanden (resources zoals CSS, JavaScript, afbeeldingen en fonts)
 // Bestanden in deze map kunnen dus door de browser gebruikt worden
@@ -53,11 +53,11 @@ app.get('/lijst', async function (request, response) {
   const userId = 61; // mijn user ID
   const params = {
     'filter[milledoni_users_id][_eq]': userId,
-     'fields': '*,milledoni_products_id.*'
+    'fields': '*,milledoni_products_id.*'
   };
 
   const productResponse = await fetch('https://fdnd-agency.directus.app/items/milledoni_users_milledoni_products_1?' +
-   new URLSearchParams(params)
+    new URLSearchParams(params)
   )
   const productResponseJSON = await productResponse.json();
 
@@ -82,8 +82,8 @@ app.post('/opslaan', async function (request, response) {
 
   await fetch('https://fdnd-agency.directus.app/items/milledoni_users_milledoni_products_1', {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},//headers= uitleg over je date> Deze data dat ik stuur is json// 
-    
+    headers: { 'Content-Type': 'application/json' },//headers= uitleg over je date> Deze data dat ik stuur is json// 
+
     body: JSON.stringify({ //body=het lichaam van je request
       milledoni_users_id: 61,
       milledoni_products_id: productId
@@ -111,12 +111,12 @@ app.post('/opslaan', async function (request, response) {
 app.post('/verwijder', async function (request, response) {
 
   const id = request.body.id;
-await fetch(
-  'https://fdnd-agency.directus.app/items/milledoni_users_milledoni_products_1/' + id,
-  {
-    method: 'DELETE'
-  }
-);
+  await fetch(
+    'https://fdnd-agency.directus.app/items/milledoni_users_milledoni_products_1/' + id,
+    {
+      method: 'DELETE'
+    }
+  );
 
   response.redirect('/lijst');
 
@@ -142,11 +142,11 @@ app.get('/valentijnsdag', async function (request, response) {
 
 })
 
-app.get('/:tags', async function (request, response){
-const params = {
-  fields: 'image,name',
-'filter[tags][_contains]': request.params.tags
-}
+app.get('/:tags', async function (request, response) {
+  const params = {
+    fields: 'image,name',
+    'filter[tags][_contains]': request.params.tags
+  }
 
   const productResponse = await fetch(
     'https://fdnd-agency.directus.app/items/milledoni_products?' +
